@@ -36,12 +36,12 @@ FINALPROJECT_EPAM
 ```
 
 # Data Science Part
-## Conlusions and Insights from EDA:
-*Data Set Format*
+## Conlusions and Insights from EDA
+*Data Set Format*   
 The dataset was provided in two separate .csv files. The first one contains data needed for training. The second one contains testing data.
 Each of the datasets contains two columns. First column is a text review to a film. Second column is a target feature - review sentiment value, that takes on values: "positive" or "negative", depending on the mood expressed in corresponding review.
 
-*General Statistics About Train and Test Sets*
+*General Statistics About Train and Test Sets*    
 - There are 40000 of reviews in training dataset. In total there were used 9254510 non-unique tokens in corpus. The shortest review consists of 4 tokens. The largest review consists of 2470 tokens. On average a review in train dataset has 231 tokens. The standard deviation of reviews lengths in training dataset is 171 tokens.
 Reviews with negative sentiments and with positive sentiments on average have the same number of tokens in them , around 230 words for both.
 
@@ -50,20 +50,20 @@ Reviews with negative sentiments and with positive sentiments on average have th
 
 - Main statistics for training and testing sets are very similiar, almost the same.
 
-*Distribution of Reviews Lengths*
+*Distribution of Reviews Lengths*  
 Distribution of random variable "Length of review" resembles exponential distribution (the same results for training and testing sets).
 Reviews with length more than 1000 tokens could be considered as outliers, unusually large reviews. But for this work such reviews will not be deleted from dataset, as they still might convey very important information during modeling.
 
-*Missing values*
+*Missing values*  
 There are no missing values in both training and testing datasets.
 
-*Distribution of sentiment feature*
+*Distribution of sentiment feature*  
 In both training and testing sets, half of all reviews is marked to have negative sentiment and other half is of positive sentiment. In this sense both datasets are balanced. That also means that accuracy metric could be succesfully used for models perfomance evaluating.
 
-*Unique tokens in corpuses*
+*Unique tokens in corpuses*  
 Number of unique tokens used in training corpus(380518 tokens) is twice(approximately) as big as number of unique words used in test corpus(158916 tokens).
 
-*Most common words in datasets*
+*Most common words in datasets*  
 In both train and test sets most common, popular are in general stop-words. Evidently, they are supposed to be deleted. Can be considered as noise.
 Expression "/><br" is also very frequently appearing expression in corpus - also definitely should be deleted. Can be considered as noise.
 
@@ -85,49 +85,49 @@ Distinctive pairs of words for negative reviews(TEST SET): "bad movie", "waste t
 
 Overall, test and train sets have common most popular two words phrases for negative and positive reviews. That again proves that both sets are related, are coming from the same distribution.
 
-*Duplicates*
+*Duplicates*  
 There are duplicate reviews in training and testing sets. Number of them is very small: for training set is 272 and for testing set is 13. Duplicate reviews should be deleted, so only one stays (out of all duplicates).
 
-*Mutual reviews in test and train sets*
+*Mutual reviews in test and train sets*  
 There are same, mutual reviews (133) in test and train sets. Such reviews should be deleted from one of the sets.
 
 ## Description of Feature Engineering and Data Preparation
-*Dropping duplicates (all kinds of)*  
+*Dropping duplicates (all kinds of)*    
 Will be dropped dublicates that exist separately in test and train sets.
 Mutual reviews (for train and test sets) will be deleted from train set. It is not acceptable for train and test sets to intersect.
 
-*Deleting unnecessary characters*  
+*Deleting unnecessary characters*    
 Reviews could contain: URL links, numbers (11, 0, 34, 2005, etc), punctuation and special characters (,^&*;/$) - all such characters/expressions should be deleted from each review. These characters, parts of review texts do not contain information related, helpful for modeling. That is why they are being deleted. Converting all words in each review to lower case will then be applied(so to make text uniform; for example to make words: "Book", "book", "BOOK", "BooK" - represent the same word "book", but not different words).
 
-*Tokenization*  
+*Tokenization*    
 Will be applied tokenization to every review text - meaning that every review will be divided by words of which it consists. This will make it easier to preprocess text in next steps.
 
-*Stop-words filtering*  
+*Stop-words filtering*    
 Stop-words like: "the", "a", "is", "they", "me", ... - should be deleted. Because they are ubiquitous across all reviews , do not contain helpful, vital information that could be used during modeling. Such words could be considered as noise.
 
-*Stemming vs Lemmatization*  
+*Stemming vs Lemmatization*    
 In the project will be tried two techniques: stemming and lemmatization. Then they will be compared (after modeling) in order to discover which of them works better, gives better results (with which of technique models achieve higher accuracy). Brief description of them: these two techniques are used to truncate words, reduce their form to the smallest possible. Use of them would make vocabulary of all reviews much smaller, would reduce feature space, which is beneficial. Stemming is based on deleting ending of the word. Lemmatization is based on finding the smallest original correct lexical form of the word. Lemmatization is much complicated and precise technique.
 
 Stemming gives very rough results, for example it transforms words: accident -> accid; revival -> reviv; theatre -> theatr; movies -> movi; amusing -> amus. Which are not properly spelled english words. Basically it comes up with short, unmeaningfull words.  
 
 From other side, we get almost perfect truncation of words after applying lemmatization, they are correctly transformed to their correct shortest forms. Though, sometimes, technique might not shorten word when it is applicable, possible.
 
-*Deleting tokens of length less or equal to 2*
+*Deleting tokens of length less or equal to 2*  
 We need do delete symbol "br", which was postulated earlier in EDA. Overall, we do not need any tokens of length <= 2, most likely they do not explain anything, are not valuable during modeling.
 
-*Vectorization*
+*Vectorization*  
 Two different techniques for vectorization  will be used: Count Vectorizer and TF-IDF. After training models, the best vectorization technique will be chosen. Difference between Count Vectorizer and TF-IDF:   
 - Count Vectorizer is a technique of converting text to vector, that relies solely on counting frequencies of each word appearing in peace of text(in short);
 - TF-IDF Vectorizer still converts text to vector, but it not only counts word frequency in text, but also reduces importance of words that are too common across the whole corpus. It is more sophisticated technique of text vectorization(comparing to previous one). It is expected for it to give better results during modeling, as it conveys more information to model, comparing to Count Vectorizer.
 
-*Preparing target variable*  
+*Preparing target variable*    
 Target feature needs to be extracted from train and test datasets(column "sentiment"). After that its values will mapped: "positive" -> 1 and "negative" -> 0.
 
-## Reasonings on Model Selection
+## Reasonings on Model Selection  
 For baseline model was chosen Naive Bayes model, as it is very simple, easy and fast classification algorithm. After that was tried Logistic Regression, as it is also pretty fast, easy-interpretable and light algorithm, suitable for classification. More advanced algorithms: Random Forest Classifier and XGBoost classifier were tried at the end, to investigate if they could reach better accuracy than previous two algortihms.
 The best model can be considered such that is as simple as possible, and that simultaneously has the highest accuracy score on test set.
 
-## Conclusions of Modeling and Overall Perfomance Evaluation
+## Conclusions of Modeling and Overall Perfomance Evaluation  
 Models that were using lemmatized dataset were slightly better than those that were trained on stemmatized data. Though mostly the diference in perfomance is very small, could be considered insignificant.
 
 Naive Bayes and Logistic Regression models that were trained on data vectorized with TF-IDF technique showed slightly higher accuracy scores(compared to same type models trained on vectorized data with Count technique). The opposite holds for Random Forest Clasifiers and XGBoost Classifiers(which had higher accuracy scores with data vectorized using Count technique), though in this case the differences is very small, again can be considered insignificant.
