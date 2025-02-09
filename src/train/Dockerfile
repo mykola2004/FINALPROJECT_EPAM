@@ -3,7 +3,7 @@ FROM python:3.10
 WORKDIR /app
 
 COPY data /app/data
-COPY models /app/models
+COPY outputs/models /app/models
 COPY src/train /app/train
 
 COPY requirements.txt .
