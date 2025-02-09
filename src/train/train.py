@@ -12,12 +12,14 @@ from sklearn.metrics import accuracy_score
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s", handlers=[logging.StreamHandler()])
 
 # For Docker use
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+#BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # For Docker use  
-#model_save_path = os.path.join(BASE_DIR, "models")
-model_save_path = os.path.join(BASE_DIR, "outputs", "models")
+model_save_path = os.path.join(BASE_DIR, "models")
+
+#model_save_path = os.path.join(BASE_DIR, "outputs", "models")
 
 def load_data(train_path, test_path):
     train_data = pd.read_csv(train_path)
@@ -79,11 +81,11 @@ feature_engineering_script = os.path.join(BASE_DIR, "src", "train", "feature_eng
 
 # Launching preprocessing script
 logging.info("Launching data preprocessing script...")
-#subprocess.run(["python", "/app/train/preprocess.py"], check=True)
+subprocess.run(["python", "/app/train/preprocess.py"], check=True)
 
 # Launching feature engineering script
 logging.info("Launching feature engineering script...")
-#subprocess.run(["python", "/app/train/data_engineering.py"], check=True)
+subprocess.run(["python", "/app/train/data_engineering.py"], check=True)
 
 os.makedirs(model_save_path, exist_ok=True)
 

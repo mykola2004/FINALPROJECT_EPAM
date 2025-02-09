@@ -22,8 +22,8 @@ nltk.download('wordnet', download_dir=NLTK_DIR)
 
 # BASE Directory Setting
 # For Docker use 
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # Train and Test Paths
 train_data_path = os.path.join(BASE_DIR, "data", "raw", "train.csv")
