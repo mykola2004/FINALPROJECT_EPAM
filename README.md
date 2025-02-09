@@ -168,7 +168,7 @@ python create_directories.py
 ```
 
 ## Running training scripts
-1. In order to prepare data, run models and investigate their perfomance, first of all you need to create image of a container(in which all of these procedures will be flowing). Therefore, you need to run this command(use Command Prompt from root directory of project):
+1. In order to prepare data, run models and investigate their perfomance, first of all you need to create image of a container(in which all of these procedures will be flowing). Therefore, you need to run this command(use Command Prompt from root directory of project "\FINALPROJECT_EPAM"):
 ```bash
 docker build -f src/train/Dockerfile -t training_image .
 ```
@@ -216,7 +216,7 @@ python preprocess.py; python data_engineering.py; python train.py
 
 ## Running inference scripts
 1. In this step, will be used best model out of all trained for predicting sentiments of unseen during training reviews.
-First of all, image of a container, in which inferencing will be running, needs to be created, it can be done with command(use Command Prompt from root directory of project): 
+First of all, image of a container, in which inferencing will be running, needs to be created, it can be done with command(use Command Prompt from root directory of project "\FINALPROJECT_EPAM"): 
 ```bash
 docker build -f src/inference/Dockerfile -t inference_image .
 ```
