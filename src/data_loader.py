@@ -8,7 +8,7 @@ dataset_urls = {
     "test_data.csv": "https://static.cdn.epam.com/uploads/583f9e4a37492715074c531dbd5abad2/ds/final_project_test_dataset.zip"
 }
 
-save_folder = os.path.join("..", "data", "raw")
+save_folder = os.path.join(".", "data", "raw")
 os.makedirs(save_folder, exist_ok=True)
 
 def download_zip(url, file_path):
@@ -46,3 +46,13 @@ for name, url in dataset_urls.items():
     os.remove(zip_path)
 
 print("All data files saved successfully in '../data/raw/'.")
+
+# Create folder outputs/predictions 
+save_folder = os.path.join(".", "outputs", "predictions")
+os.makedirs(save_folder, exist_ok=True)
+# Create folder outputs/models 
+save_folder = os.path.join(".", "outputs", "models")
+os.makedirs(save_folder, exist_ok=True)
+# Create folder data/processed 
+save_folder = os.path.join(".", "data", "processed")
+os.makedirs(save_folder, exist_ok=True)

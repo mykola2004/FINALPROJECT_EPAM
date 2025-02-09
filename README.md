@@ -28,7 +28,7 @@ FINALPROJECT_EPAM
 │   │   ├── Dockerfile
 │   │   ├── requirements_inference.txt
 │   │   └── run_inference.py
-│   │
+│   ├── create_directories.py               # Script used for creating necessary directories  
 │   └── data_loader.py                      # Script used for downloading raw data in /data/raw/ folder
 │
 ├── README.md                               # Description of the project, instruction how to launch a project 
@@ -159,6 +159,13 @@ Just open Command Prompt in folder, where "data_loader.py" exists and use this c
 python data_loader.py
 ```
 After that, test and train files will appear in directory "./data/raw".
+
+## Preparing project directories
+Directories "data/processed", "outputs/predictions", "outputs/models" should be created at the beginning. Those are necessary folders that will be used in next steps during training and inference stages. 
+Just open Command Prompt in folder, where "create_directories.py" exists and use this command:
+```bash
+python create_directories.py
+```
 
 ## Running training scripts
 1. In order to prepare data, run models and investigate their perfomance, first of all you need to create image of a container(in which all of these procedures will be flowing). Therefore, you need to run this command:
